@@ -1,0 +1,27 @@
+meta {
+  name: Admin Action UPDATE
+  type: http
+  seq: 5
+}
+
+post {
+  url: https://api.orange.com/camara/playground/admin/v1.0/action
+  body: json
+  auth: none
+}
+
+headers {
+  Authorization: Bearer {{adminAccessToken}}
+}
+
+body:json {
+  {
+    "action": "UPDATE",
+    "phoneNumber": "{{PHONE_NUMBER}}",
+    "data": {
+      "simSwap": {
+        "latestSimChange": "2025-11-18T09:25:39.181Z"
+      }
+    }
+  }
+}

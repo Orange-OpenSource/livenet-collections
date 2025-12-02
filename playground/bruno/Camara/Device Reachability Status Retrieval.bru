@@ -1,0 +1,23 @@
+meta {
+  name: Device Reachability Status Retrieval
+  type: http
+  seq: 7
+}
+
+post {
+  url: https://api.orange.com/camara/playground/api/device-reachability-status/v0.6/retrieve
+  body: json
+  auth: inherit
+}
+
+headers {
+  Authorization: Bearer {{accessToken}}
+}
+
+body:json {
+  {
+    "device": {
+      "phoneNumber": "{{PHONE_NUMBER}}"
+    }
+  }
+}

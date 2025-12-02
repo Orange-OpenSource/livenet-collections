@@ -1,0 +1,23 @@
+meta {
+  name: Device Roaming Status Retrieval
+  type: http
+  seq: 6
+}
+
+post {
+  url: https://api.orange.com/camara/playground/api/device-roaming-status/v0.6/retrieve
+  body: json
+  auth: inherit
+}
+
+headers {
+  Authorization: Bearer {{accessToken}}
+}
+
+body:json {
+  {
+    "device": {
+      "phoneNumber": "{{PHONE_NUMBER}}"
+    }
+  }
+}

@@ -1,0 +1,28 @@
+meta {
+  name: Quality on Demand Sessions (POST)
+  type: http
+  seq: 13
+}
+
+post {
+  url: https://api.orange.com/camara/playground/api/quality-on-demand/v0.11/sessions
+  body: json
+  auth: inherit
+}
+
+headers {
+  Authorization: Bearer {{accessToken}}
+}
+
+body:json {
+  {
+    "device": {
+      "phoneNumber": "{{PHONE_NUMBER}}"
+    },
+    "applicationServer": {
+      "ipv4Address": "172.20.120.84"
+    },
+    "qosProfile": "QOS_10M_Video",
+    "duration": 1000
+  }
+}

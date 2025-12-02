@@ -1,0 +1,19 @@
+meta {
+  name: Quality on Demand Sessions (DELETE)
+  type: http
+  seq: 15
+}
+
+delete {
+  url: https://api.orange.com/camara/playground/api/quality-on-demand/v0.11/sessions/:id
+  body: none
+  auth: inherit
+}
+
+params:path {
+  id: 
+}
+
+headers {
+  Authorization: Bearer {{accessToken}}
+}

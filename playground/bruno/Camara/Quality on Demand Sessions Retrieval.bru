@@ -1,0 +1,23 @@
+meta {
+  name: Quality on Demand Sessions Retrieval
+  type: http
+  seq: 17
+}
+
+post {
+  url: https://api.orange.com/camara/playground/api/quality-on-demand/v0.11/retrieve-sessions
+  body: json
+  auth: inherit
+}
+
+headers {
+  Authorization: Bearer {{accessToken}}
+}
+
+body:json {
+  {
+    "device": {
+      "phoneNumber": "{{PHONE_NUMBER}}"
+    }
+  }
+}

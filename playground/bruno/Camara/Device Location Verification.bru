@@ -1,0 +1,31 @@
+meta {
+  name: Device Location Verification
+  type: http
+  seq: 4
+}
+
+post {
+  url: https://api.orange.com/camara/playground/api/location-verification/v1/verify
+  body: json
+  auth: inherit
+}
+
+headers {
+  Authorization: Bearer {{accessToken}}
+}
+
+body:json {
+  {
+    "device": {
+      "phoneNumber": "{{PHONE_NUMBER}}"
+    },
+    "area": {
+      "areaType": "CIRCLE",
+      "center": {
+        "latitude": 48.82,
+        "longitude": 2.27
+      },
+      "radius": 500
+    }
+  }
+}

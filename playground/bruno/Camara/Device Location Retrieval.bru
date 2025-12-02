@@ -1,0 +1,23 @@
+meta {
+  name: Device Location Retrieval
+  type: http
+  seq: 3
+}
+
+post {
+  url: https://api.orange.com/camara/playground/api/location-retrieval/v0.3/retrieve
+  body: json
+  auth: inherit
+}
+
+headers {
+  Authorization: Bearer {{accessToken}}
+}
+
+body:json {
+  {
+    "device": {
+      "phoneNumber": "{{PHONE_NUMBER}}"
+    }
+  }
+}

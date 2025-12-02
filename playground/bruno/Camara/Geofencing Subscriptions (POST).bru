@@ -1,0 +1,44 @@
+meta {
+  name: Geofencing Subscriptions (POST)
+  type: http
+  seq: 9
+}
+
+post {
+  url: https://api.orange.com/camara/playground/api/geofencing-subscriptions/v0.3/subscriptions
+  body: json
+  auth: inherit
+}
+
+headers {
+  Authorization: Bearer {{accessToken}}
+}
+
+body:json {
+  {
+    "protocol": "HTTP",
+    "sink": "https://notificationSendServer12.supertelco.com",
+    "types": [
+      "org.camaraproject.geofencing-subscriptions.v0.area-entered"
+    ],
+    "config": {
+      "subscriptionDetail": {
+        "device": {
+          "phoneNumber": "{{PHONE_NUMBER}}"
+        },
+        "area": {
+          "areaType": "CIRCLE",
+          "center": {
+            "latitude": 48.80,
+            "longitude": 2.259
+          },
+          "radius": 2000
+        }
+      },
+      "initialEvent": true,
+      "subscriptionMaxEvents": 10,
+      "subscriptionExpireTime": "2025-12-31T05:40:58.469Z"
+    }
+  }
+  
+}

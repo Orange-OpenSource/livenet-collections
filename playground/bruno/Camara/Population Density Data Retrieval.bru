@@ -1,0 +1,49 @@
+meta {
+  name: Population Density Data Retrieval
+  type: http
+  seq: 5
+}
+
+post {
+  url: https://api.orange.com/camara/playground/api/population-density-data/v0.2/retrieve
+  body: json
+  auth: none
+}
+
+headers {
+  Authorization: Bearer {{accessToken}}
+}
+
+body:json {
+  {
+    "area": {
+      "areaType": "POLYGON",
+      "boundary": [
+        {
+          "latitude": 41.351099,
+          "longitude": 2.129661
+        },
+        {
+          "latitude": 41.353928,
+          "longitude": 2.136373
+        },
+        {
+          "latitude": 41.354663,
+          "longitude": 2.135839
+        },
+        {
+          "latitude": 41.351921,
+          "longitude": 2.128704
+        }
+      ]
+    },
+    "startTime": "2025-11-24T11:00:00.000Z",
+    "endTime": "2025-11-24T11:39:59.000Z",
+    "precision": 7
+  }
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}

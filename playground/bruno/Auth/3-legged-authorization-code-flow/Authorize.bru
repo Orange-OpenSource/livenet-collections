@@ -1,0 +1,50 @@
+meta {
+  name: Authorize
+  type: http
+  seq: 1
+}
+
+get {
+  url: https://api.orange.com/openidconnect/playground/v1.0/authorize?response_type=code&client_id={{CLIENT_ID}}&redirect_uri=http://localhost:3000&scope=openid dpv:{{DPV_VALUE}} {{TECHNICAL_PARAMETER}}&state=state&login_hint=tel:{{PHONE_NUMBER}}
+  body: none
+  auth: inherit
+}
+
+params:query {
+  response_type: code
+  client_id: {{CLIENT_ID}}
+  redirect_uri: http://localhost:3000
+  scope: openid dpv:{{DPV_VALUE}} {{TECHNICAL_PARAMETER}}
+  state: state
+  login_hint: tel:{{PHONE_NUMBER}}
+}
+
+headers {
+  Accept: application/json
+}
+
+vars:pre-request {
+  DPV_VALUE: FraudPreventionAndDetection
+  TECHNICAL_PARAMETER: number-verification:verify
+}
+
+script:pre-request {
+  req.setMaxRedirects(0)
+}
+
+script:post-response {
+  const location = res.headers.location
+  const decodeLocation = decodeURI(location)
+  const params = location.split('?')[1]
+  const codeParams = params.split('&').find(it => it.startsWith("code="))
+  const code = codeParams.split('=')[1]
+  const decodedCode = decodeURIComponent(code)
+  bru.setVar("authorizationCode", decodedCode)
+}
+
+settings {
+  encodeUrl: true
+  timeout: inherit
+  followRedirects: false
+  maxRedirects: 0
+}

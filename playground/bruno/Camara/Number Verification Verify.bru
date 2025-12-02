@@ -1,0 +1,21 @@
+meta {
+  name: Number Verification Verify
+  type: http
+  seq: 2
+}
+
+post {
+  url: https://api.orange.com/camara/playground/api/number-verification/v1/verify
+  body: json
+  auth: none
+}
+
+headers {
+  Authorization: Bearer {{accessToken}}
+}
+
+body:json {
+  {
+    "phoneNumber": "{{PHONE_NUMBER}}"
+  }
+}

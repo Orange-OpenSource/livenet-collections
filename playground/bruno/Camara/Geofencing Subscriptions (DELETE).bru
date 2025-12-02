@@ -1,0 +1,19 @@
+meta {
+  name: Geofencing Subscriptions (DELETE)
+  type: http
+  seq: 10
+}
+
+delete {
+  url: https://api.orange.com/camara/playground/api/geofencing-subscriptions/v0.3/subscriptions/:id
+  body: none
+  auth: inherit
+}
+
+params:path {
+  id: YOUR_ID
+}
+
+headers {
+  Authorization: Bearer {{accessToken}}
+}

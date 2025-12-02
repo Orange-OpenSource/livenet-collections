@@ -1,0 +1,27 @@
+meta {
+  name: Geofencing Subscriptions (GET)
+  type: http
+  seq: 8
+}
+
+get {
+  url: https://api.orange.com/camara/playground/api/geofencing-subscriptions/v0.3/subscriptions/:id
+  body: none
+  auth: inherit
+}
+
+params:path {
+  id: 
+}
+
+headers {
+  Authorization: Bearer {{accessToken}}
+}
+
+body:json {
+  {
+    "device": {
+      "phoneNumber": "{{PHONE_NUMBER}}"
+    }
+  }
+}

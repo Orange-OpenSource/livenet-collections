@@ -1,0 +1,25 @@
+meta {
+  name: Get Admin Token
+  type: http
+  seq: 1
+}
+
+post {
+  url: https://api.orange.com/oauth/v3/token
+  body: formUrlEncoded
+  auth: inherit
+}
+
+headers {
+  Authorization: Basic {{BASIC_CREDS}}
+}
+
+body:form-urlencoded {
+  grant_type: client_credentials
+}
+
+script:post-response {
+  const accessToken = res.body.access_token
+  bru.setVar('adminAccessToken', accessToken)
+  
+}

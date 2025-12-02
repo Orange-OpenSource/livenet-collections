@@ -1,0 +1,16 @@
+{
+  "version": "1",
+  "name": "Playground",
+  "type": "collection",
+  "ignore": [
+    "node_modules",
+    ".git"
+  ],
+  "scripts": {
+    "additionalContextRoots": ["./shared-scripts"],
+    "moduleWhitelist": ["fs"],
+    "filesystemAccess": {
+      "allow": true
+    }
+  }
+}

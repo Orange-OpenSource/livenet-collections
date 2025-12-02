@@ -1,0 +1,28 @@
+meta {
+  name: Get Token
+  type: http
+  seq: 2
+}
+
+post {
+  url: https://api.orange.com/openidconnect/playground/v1.0/token
+  body: formUrlEncoded
+  auth: inherit
+}
+
+headers {
+  Authorization: Basic {{BASIC_CREDS}}
+  Accept: application/json
+}
+
+body:form-urlencoded {
+  grant_type: authorization_code
+  redirect_uri: http://localhost:3000
+  code: {{authorizationCode}}
+}
+
+script:post-response {
+  const accessToken = res.body.access_token
+  bru.setVar('accessToken', accessToken)
+  
+}

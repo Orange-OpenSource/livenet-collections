@@ -1,0 +1,58 @@
+meta {
+  name: Authorize
+  type: http
+  seq: 1
+}
+
+post {
+  url: https://api.orange.com/openidconnect/playground/v1.0/bc-authorize
+  body: formUrlEncoded
+  auth: inherit
+}
+
+body:form-urlencoded {
+  scope: openid dpv:{{DPV_VALUE}} {{TECHNICAL_PARAMETER}}
+  login_hint: tel:{{PHONE_NUMBER}}
+  client_assertion_type: urn:ietf:params:oauth:client-assertion-type:jwt-bearer
+  client_assertion: {{clientAssertion}}
+}
+
+vars:pre-request {
+  DPV_VALUE: FraudPreventionAndDetection
+  TECHNICAL_PARAMETER: sim-swap:check
+}
+
+script:pre-request {
+  console.log('Pre-request script', 'Authorize')
+  
+  const jose = require('node-jose')
+  const { retrieveKey } = require('./shared-scripts/keystore.js')
+  
+  const clientId = bru.getEnvVar('CLIENT_ID')
+  
+  const key = await retrieveKey()
+  
+  const payload = {
+    iat: Math.floor(Date.now() / 1000),
+    exp: Math.floor(Date.now() / 1000) + 300,
+    iss: clientId,
+  }
+  
+  await jose.JWS
+    .createSign({ format: 'compact' }, key.toJSON(true))
+    .update(JSON.stringify(payload)).final().then(result => {
+      bru.setVar("clientAssertion", result)
+    })
+}
+
+script:post-response {
+  const authReqId = res.body.auth_req_id
+  bru.setVar('authReqId', authReqId)
+}
+
+settings {
+  encodeUrl: true
+  timeout: inherit
+  followRedirects: false
+  maxRedirects: 0
+}

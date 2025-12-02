@@ -1,0 +1,27 @@
+meta {
+  name: Quality of Service Profiles
+  type: http
+  seq: 12
+}
+
+get {
+  url: https://api.orange.com/camara/playground/api/qos-profiles/v0.11/qos-profiles/:name
+  body: none
+  auth: inherit
+}
+
+params:path {
+  name: QOS_10M_Video
+}
+
+headers {
+  Authorization: Bearer {{accessToken}}
+}
+
+body:json {
+  {
+    "device": {
+      "phoneNumber": "{{PHONE_NUMBER}}"
+    }
+  }
+}

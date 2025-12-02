@@ -1,0 +1,20 @@
+# Ignore log and temporary files
+*.log
+*.tmp
+**/.DS_Store
+
+# Ignore /build directory
+node_modules
+
+# Dependencies
+package-lock.json
+
+# Ignore ide
+.idea
+.editorconfig
+.history
+.vscode
+
+# Ignore keystore
+.keystore.json
+**/.keystore.json

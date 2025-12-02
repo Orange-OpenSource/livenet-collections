@@ -1,0 +1,23 @@
+meta {
+  name: Quality of Service Profiles Retrieval
+  type: http
+  seq: 11
+}
+
+post {
+  url: https://api.orange.com/camara/playground/api/qos-profiles/v0.11/retrieve-qos-profiles
+  body: json
+  auth: inherit
+}
+
+headers {
+  Authorization: Bearer {{accessToken}}
+}
+
+body:json {
+  {
+    "device": {
+      "phoneNumber": "{{PHONE_NUMBER}}"
+    }
+  }
+}

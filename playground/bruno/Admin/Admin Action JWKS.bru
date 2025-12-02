@@ -1,0 +1,53 @@
+meta {
+  name: Admin Action JWKS
+  type: http
+  seq: 6
+}
+
+post {
+  url: https://api.orange.com/camara/playground/admin/v1.0/action
+  body: json
+  auth: none
+}
+
+headers {
+  Authorization: Bearer {{adminAccessToken}}
+}
+
+body:json {
+  {
+    "action": "JWKS",
+    "keys": {{newKeys}}
+  }
+}
+
+script:pre-request {
+  console.log('Pre-request script', 'Admin Action JWKS')
+  
+  const jose = require('node-jose')
+  const { retrieveKey } = require('./shared-scripts/keystore.js')
+  
+  const key = await retrieveKey()
+  
+  const response = await bru.runRequest("Admin/Admin Action LIST")
+  if (response.status === 200) {
+    const data = response.data
+  
+    const kidToCheck = key?.kid
+  
+    const existingKeys = Array.isArray(data?.keys) ? data.keys : []
+    const newKeys = [...existingKeys]
+  
+    const exists = newKeys.some(k => typeof k === 'object' && k?.kid === kidToCheck)
+  
+    if (!exists) {
+      newKeys.push(key.toJSON(false))
+      console.log(`Added key with kid="${kidToCheck}" in key list`, newKeys)
+    } else {
+      console.log(`The key with kid="${kidToCheck}" already exists in key list`)
+    }
+    bru.setVar("newKeys", newKeys)
+  } else {
+    console.log('Failure with Error=', response.status)
+  }
+}

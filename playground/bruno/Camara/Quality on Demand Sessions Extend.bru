@@ -1,0 +1,25 @@
+meta {
+  name: Quality on Demand Sessions Extend
+  type: http
+  seq: 16
+}
+
+post {
+  url: https://api.orange.com/camara/playground/api/quality-on-demand/v0.11/sessions/:id/extend
+  body: json
+  auth: inherit
+}
+
+params:path {
+  id: 
+}
+
+headers {
+  Authorization: Bearer {{accessToken}}
+}
+
+body:json {
+  {
+    "requestedAdditionalDuration": 1800
+  }
+}
