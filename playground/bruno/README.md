@@ -52,7 +52,10 @@ These variables have default values but you can modify them to suit your scenari
 
 | Variable | Description | Example |
 |----------|-------------|---------|
-| `PHONE_NUMBER` | Phone number for testing (E.164 format) | `+33612345678` |
+| `PHONE_NUMBER` | Phone number for testing (E.164 format) | `+990100000000` |
+
+> **Note**: To make testing easier, a set of test phone numbers (all sharing the same fictitious country prefix +990) are available out of the box and pre-configured with relevant use-case data.
+> The full list is available here: [Test Phone Numbers](https://docs.developer.orange.com/network-apis/practical-guides/try-it-for-free/test-phone-numbers)
 
 ### Authentication Flows Overview
 

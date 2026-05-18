@@ -1,0 +1,26 @@
+meta {
+  name: KYC Match
+  type: http
+  seq: 3
+}
+
+post {
+  url: https://api.orange.com/camara/playground/api/kyc-match/v0.2/match
+  body: json
+  auth: none
+}
+
+headers {
+  Authorization: Bearer {{accessToken}}
+}
+
+body:json {
+  {
+    "phoneNumber": "{{PHONE_NUMBER}}",
+    "name": "Alice Arnault",
+    "locality": "Paris",
+    "postalCode": "75001",
+    "country": "fr",
+    "gender": "FEMALE"
+  }
+}
