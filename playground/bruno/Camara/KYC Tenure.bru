@@ -1,11 +1,11 @@
 meta {
-  name: Device Swap Check
+  name: KYC Tenure
   type: http
-  seq: 5
+  seq: 4
 }
 
 post {
-  url: https://api.orange.com/camara/playground/api/device-swap/v0.2/check
+  url: https://api.orange.com/camara/playground/api/light/kyc-tenure/v0.2/check-tenure
   body: json
   auth: none
 }
@@ -17,6 +17,6 @@ headers {
 body:json {
   {
     "phoneNumber": "{{PHONE_NUMBER}}",
-    "maxAge": 240
+    "tenureDate": "2026-04-20"
   }
 }
