@@ -1,0 +1,22 @@
+meta {
+  name: Device Swap Check
+  type: http
+  seq: 4
+}
+
+post {
+  url: https://api.orange.com/camara/playground/api/device-swap/v0.2/check
+  body: json
+  auth: none
+}
+
+headers {
+  Authorization: Bearer {{accessToken}}
+}
+
+body:json {
+  {
+    "phoneNumber": "{{PHONE_NUMBER}}",
+    "maxAge": 240
+  }
+}
